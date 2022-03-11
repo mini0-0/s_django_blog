@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Pycharam files
+.idea/
+
+# Dajango files
+migrations/
