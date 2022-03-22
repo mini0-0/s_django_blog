@@ -1,21 +1,28 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import Post
 
-# Create your views here.
-def index(request):
-    posts = Post.objects.all().order_by('-pk') # 모든 post 가져오기
+class PostList(ListView):
+    model = Post
+    ordering = '-pk'
 
-    return render(request, 'blog/index.html',
-                  {
-                      'posts' : posts,
-                  }
-    )
+class PostDetail(DetailView):
+    model = Post
 
-def single_post_page(request, pk):
-    post = Post.objects.get(pk=pk)
+# def index(request):
+#     posts = Post.objects.all().order_by('-pk') # 모든 post 가져오기
+#
+#     return render(request, 'blog/index.html',
+#                   {
+#                       'posts' : posts,
+#                   }
+#     )
 
-    return render(request, 'blog/single_post_page.html',
-                  {
-                      'post' : post,
-                  }
-    )
+# def single_post_page(request, pk):
+#     post = Post.objects.get(pk=pk)
+#
+#     return render(request, 'blog/post_detail.html',
+#                   {
+#                       'post' : post,
+#                   }
+#     )
