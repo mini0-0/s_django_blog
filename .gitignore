@@ -133,3 +133,7 @@ dmypy.json
 
 # Dajango files
 migrations/
+
+# User contents
+_media/
+
