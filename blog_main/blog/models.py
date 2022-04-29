@@ -2,8 +2,11 @@ import os.path
 
 from django.db import models
 from django.contrib.auth.models import User
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
 
-# Create your models here.
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=20, unique=True, allow_unicode=True)
@@ -29,7 +32,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=30)
-    content = models.TextField()
+    content = MarkdownxField()
 
     hook_msg = models.TextField(blank=True)
 
@@ -51,3 +54,6 @@ class Post(models.Model):
 
     def get_file_name(self):
         return os.path.basename(self.file_upload.name)
+
+    def get_content_markdown(self):
+        return markdown(self.content)
